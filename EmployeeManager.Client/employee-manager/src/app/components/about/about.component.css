@@ -1,0 +1,21 @@
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.bi {
+  margin-right: 8px;
+}
+
+.border.rounded {
+  transition: transform 0.2s;
+}
+
+.border.rounded:hover {
+  transform: translateY(-2px);
+} 

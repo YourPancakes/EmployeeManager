@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmployeeDataCannotBeNull" xml:space="preserve">
+    <value>Employee data cannot be null</value>
+    <comment>Error message displayed when employee data is null during creation or update</comment>
+  </data>
+  <data name="DepartmentDataCannotBeNull" xml:space="preserve">
+    <value>Department data cannot be null</value>
+    <comment>Error message displayed when department data is null during creation or update</comment>
+  </data>
+  <data name="SalaryUpdateValidationFailed" xml:space="preserve">
+    <value>Salary update validation failed</value>
+    <comment>Error message displayed when salary update validation fails</comment>
+  </data>
+  <data name="DepartmentNameRequired" xml:space="preserve">
+    <value>Department name is required and must not exceed 100 characters</value>
+    <comment>Validation message for department name requirements</comment>
+  </data>
+  <data name="DepartmentNamePatternInvalid" xml:space="preserve">
+    <value>Department name can only contain letters, spaces, and hyphens</value>
+    <comment>Validation message for department name pattern</comment>
+  </data>
+  <data name="CompanyIdRequired" xml:space="preserve">
+    <value>Company ID must be greater than 0</value>
+    <comment>Validation message for company ID requirement</comment>
+  </data>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>Full name is required and must not exceed 200 characters</value>
+    <comment>Validation message for employee full name requirements</comment>
+  </data>
+  <data name="BirthDateInvalid" xml:space="preserve">
+    <value>Birth date must be in the past and cannot be more than 100 years ago</value>
+    <comment>Validation message for birth date requirements</comment>
+  </data>
+  <data name="HireDateInvalid" xml:space="preserve">
+    <value>Hire date cannot be in the future</value>
+    <comment>Validation message for hire date requirements</comment>
+  </data>
+  <data name="SalaryInvalid" xml:space="preserve">
+    <value>Salary must be greater than 0 and cannot exceed 1,000,000</value>
+    <comment>Validation message for salary requirements</comment>
+  </data>
+  <data name="DepartmentIdRequired" xml:space="preserve">
+    <value>Department ID must be greater than 0</value>
+    <comment>Validation message for department ID requirement</comment>
+  </data>
+  <data name="NewSalaryInvalid" xml:space="preserve">
+    <value>New salary must be greater than 0 and cannot exceed 1,000,000</value>
+    <comment>Validation message for new salary requirements</comment>
+  </data>
+  <data name="MaximumCurrentSalaryInvalid" xml:space="preserve">
+    <value>Maximum current salary must be greater than 0 and cannot exceed 1,000,000</value>
+    <comment>Validation message for maximum current salary requirements</comment>
+  </data>
+  <data name="NewSalaryMustBeHigher" xml:space="preserve">
+    <value>New salary should be higher than the maximum current salary threshold to avoid salary reductions</value>
+    <comment>Validation message for salary update logic requirement</comment>
+  </data>
+</root> 

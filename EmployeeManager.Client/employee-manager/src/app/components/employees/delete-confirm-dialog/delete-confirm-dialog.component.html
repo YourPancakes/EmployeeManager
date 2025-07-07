@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h5 class="modal-title">Delete Employee</h5>
+  <button type="button" class="btn-close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+  <p>Are you sure you want to delete employee <strong>{{ employee.fullName }}</strong>?</p>
+  <p class="text-muted">This action cannot be undone.</p>
+  <div class="alert alert-danger mt-3" *ngIf="error">
+    <h6 class="alert-heading">Error</h6>
+    <p class="mb-0">{{ error }}</p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="close()">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="delete()" [disabled]="isLoading">
+    <span class="spinner-border spinner-border-sm me-2" *ngIf="isLoading"></span>
+    Delete
+  </button>
+</div> 

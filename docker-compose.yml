@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: employee-manager-sql
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong@Passw0rd"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - employee-manager-network
+
+  frontend:
+    build:
+      context: ./EmployeeManager.Client/employee-manager
+      dockerfile: Dockerfile
+    container_name: employee-manager-frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - employee-manager-network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./EmployeeManager.Server/EmployeeManager.Server
+      dockerfile: Dockerfile
+    container_name: employee-manager-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=EmployeeManagerDb;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true;MultipleActiveResultSets=true"
+    ports:
+      - "5000:8080"
+    depends_on:
+      - sqlserver
+    networks:
+      - employee-manager-network
+    restart: always
+
+volumes:
+  sqlserver_data:
+
+networks:
+  employee-manager-network:
+    driver: bridge
