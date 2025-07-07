@@ -15,6 +15,8 @@ Employee Manager is a full-stack application for managing employees, departments
 
 ### Build and Run
 ```bash
+git clone https://github.com/YourPancakes/EmployeeManager
+cd EmployeeManager
 docker-compose up --build
 ```
 
