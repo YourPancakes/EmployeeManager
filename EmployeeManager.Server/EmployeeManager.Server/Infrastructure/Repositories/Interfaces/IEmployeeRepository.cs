@@ -16,13 +16,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Interfaces
         /// <returns>A collection of all employees in the database</returns>
         Task<IEnumerable<Employee>> GetAllAsync(CancellationToken cancellationToken = default);
 
-        /// <summary>
-        /// Retrieves employees with filtering and pagination support at database level.
-        /// </summary>
-        /// <param name="searchParameters">Optional search parameters for filtering employees</param>
-        /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
-        /// <returns>A collection of filtered employees</returns>
-        Task<IEnumerable<Employee>> GetFilteredAsync(SearchParametersDto? searchParameters = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves employees with filtering and pagination support at database level.

@@ -262,26 +262,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
         }
 
         /// <summary>
-        /// Retrieves employees with filtering and pagination support at database level.
-        /// </summary>
-        /// <param name="searchParameters">Optional search parameters for filtering employees</param>
-        /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
-        /// <returns>A collection of filtered employees</returns>
-        public async Task<IEnumerable<Employee>> GetFilteredAsync(SearchParametersDto? searchParameters = null, CancellationToken cancellationToken = default)
-        {
-            _logger.LogInformation("Retrieving employees with database-level filtering");
-
-            var query = _context.Employees.Include(e => e.Department).AsQueryable();
-
-            if (searchParameters != null)
-            {
-                query = ApplySearchFilters(query, searchParameters);
-            }
-
-            return await query.ToListAsync(cancellationToken);
-        }
-
-        /// <summary>
         /// Counts total number of employees matching the search criteria.
         /// </summary>
         /// <param name="searchParameters">Optional search parameters for filtering employees</param>
