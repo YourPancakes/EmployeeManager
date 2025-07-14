@@ -13,12 +13,23 @@ namespace EmployeeManager.Server.API.Middleware
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
         private const string CONTENT_TYPE_JSON = "application/problem+json";
 
+        /// <summary>
+        /// Initializes a new instance of the ExceptionHandlingMiddleware with required dependencies.
+        /// </summary>
+        /// <param name="next">The next middleware in the request pipeline</param>
+        /// <param name="logger">The logger instance for recording exceptions</param>
+        /// <exception cref="ArgumentNullException">Thrown when next middleware or logger is null</exception>
         public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
         {
             _next = next ?? throw new ArgumentNullException(nameof(next));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        /// <summary>
+        /// Processes the HTTP request and handles any exceptions that occur during processing.
+        /// </summary>
+        /// <param name="context">The HTTP context for the current request</param>
+        /// <returns>A task representing the asynchronous operation</returns>
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -32,6 +43,12 @@ namespace EmployeeManager.Server.API.Middleware
             }
         }
 
+        /// <summary>
+        /// Handles the exception by creating an appropriate HTTP response with error details.
+        /// </summary>
+        /// <param name="context">The HTTP context for the current request</param>
+        /// <param name="exception">The exception that occurred</param>
+        /// <returns>A task representing the asynchronous operation</returns>
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = CONTENT_TYPE_JSON;
@@ -51,6 +68,11 @@ namespace EmployeeManager.Server.API.Middleware
             await context.Response.WriteAsync(jsonResponse);
         }
 
+        /// <summary>
+        /// Determines the appropriate HTTP status code and error details based on the exception type.
+        /// </summary>
+        /// <param name="exception">The exception that occurred</param>
+        /// <returns>A tuple containing status code, title, and detail</returns>
         private static (HttpStatusCode StatusCode, string Title, string Detail) DetermineErrorResponse(Exception exception)
         {
             return exception switch
@@ -63,6 +85,13 @@ namespace EmployeeManager.Server.API.Middleware
             };
         }
 
+        /// <summary>
+        /// Creates a standardized problem details object for the error response.
+        /// </summary>
+        /// <param name="context">The HTTP context for the current request</param>
+        /// <param name="title">The error title</param>
+        /// <param name="detail">The error detail</param>
+        /// <returns>An anonymous object containing problem details</returns>
         private static object CreateProblemDetails(HttpContext context, string title, string detail)
         {
             return new

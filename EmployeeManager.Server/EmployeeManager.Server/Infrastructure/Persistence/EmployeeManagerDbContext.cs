@@ -3,20 +3,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManager.Server.Infrastructure.Persistence
 {
+    /// <summary>
+    /// Entity Framework Core database context for the Employee Manager application.
+    /// Provides access to all entities and configures their mappings.
+    /// </summary>
     public class EmployeeManagerDbContext : DbContext
     {
         private const int MAXIMUM_DEPARTMENT_NAME_LENGTH = 100;
         private const int MAXIMUM_EMPLOYEE_NAME_LENGTH = 200;
         private const string SALARY_COLUMN_TYPE = "decimal(18,2)";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeeManagerDbContext"/> class with the specified options.
+        /// </summary>
+        /// <param name="options">The options to be used by the DbContext.</param>
         public EmployeeManagerDbContext(DbContextOptions<EmployeeManagerDbContext> options) : base(options)
         {
         }
 
+        /// <summary>
+        /// Gets or sets the companies in the database.
+        /// </summary>
         public DbSet<Company> Companies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the employees in the database.
+        /// </summary>
         public DbSet<Employee> Employees { get; set; }
+
+        /// <summary>
+        /// Gets or sets the departments in the database.
+        /// </summary>
         public DbSet<Department> Departments { get; set; }
 
+        /// <summary>
+        /// Configures the entity mappings and relationships for the model.
+        /// </summary>
+        /// <param name="modelBuilder">The builder being used to construct the model for this context.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -8,6 +8,9 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Interfaces
     /// </summary>
     public interface ICompanyRepository
     {
+        /// <summary>
+        /// Retrieves the first company from the database.
+        /// </summary>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The first company if found, null otherwise</returns>
         Task<Company?> GetFirstAsync(CancellationToken cancellationToken = default);

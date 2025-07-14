@@ -9,10 +9,20 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Interfaces
     /// </summary>
     public interface IEmployeeRepository
     {
+        /// <summary>
+        /// Retrieves all employees from the database.
+        /// </summary>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>A collection of all employees in the database</returns>
         Task<IEnumerable<Employee>> GetAllAsync(CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Retrieves employees with filtering and pagination support at database level.
+        /// </summary>
+        /// <param name="searchParameters">Optional search parameters for filtering employees</param>
+        /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
+        /// <returns>A collection of filtered employees</returns>
+        Task<IEnumerable<Employee>> GetFilteredAsync(SearchParametersDto? searchParameters = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieves employees with filtering and pagination support at database level.
@@ -49,24 +59,33 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Interfaces
         /// <returns>A collection of employees with salary above the specified threshold</returns>
         Task<IEnumerable<Employee>> GetBySalaryAboveAsync(decimal minimumSalary, CancellationToken cancellationToken = default);
 
+        /// <summary>
+        /// Retrieves a specific employee by their unique identifier.
+        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to retrieve</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The employee if found, null otherwise</returns>
         Task<Employee?> GetByIdAsync(int employeeId, CancellationToken cancellationToken = default);
 
-
+        /// <summary>
+        /// Adds a new employee to the database.
+        /// </summary>
         /// <param name="employee">The employee entity to add</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The added employee with assigned identifier</returns>
         Task<Employee> AddAsync(Employee employee, CancellationToken cancellationToken = default);
 
-
+        /// <summary>
+        /// Updates an existing employee in the database.
+        /// </summary>
         /// <param name="employee">The employee entity with updated information</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The updated employee entity</returns>
         Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default);
 
-
+        /// <summary>
+        /// Deletes an employee from the database by their unique identifier.
+        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to delete</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>True if the employee was successfully deleted, false if employee not found</returns>

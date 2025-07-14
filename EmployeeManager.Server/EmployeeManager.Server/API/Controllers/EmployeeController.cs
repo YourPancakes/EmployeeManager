@@ -17,11 +17,19 @@ namespace EmployeeManager.Server.API.Controllers
     {
         private readonly IEmployeeService _employeeService;
 
+        /// <summary>
+        /// Initializes a new instance of the EmployeeController with required dependencies.
+        /// </summary>
+        /// <param name="employeeService">The employee service for business logic operations</param>
+        /// <exception cref="ArgumentNullException">Thrown when employee service is null</exception>
         public EmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
         }
 
+        /// <summary>
+        /// Retrieves all employees from the system.
+        /// </summary>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>A collection of all employees in the system</returns>
         [HttpGet]
@@ -97,6 +105,9 @@ namespace EmployeeManager.Server.API.Controllers
         public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployeesBySalaryAbove(decimal minimumSalary, CancellationToken cancellationToken = default) =>
             Ok(await _employeeService.GetEmployeesWithSalaryAboveAsync(minimumSalary, cancellationToken));
 
+        /// <summary>
+        /// Retrieves a specific employee by their unique identifier.
+        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to retrieve</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The employee if found, NotFound otherwise</returns>
@@ -107,6 +118,9 @@ namespace EmployeeManager.Server.API.Controllers
             return employee is null ? NotFound() : Ok(employee);
         }
 
+        /// <summary>
+        /// Creates a new employee in the system.
+        /// </summary>
         /// <param name="employeeCreateDto">The data transfer object containing employee information</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The created employee with assigned identifier</returns>
@@ -122,6 +136,9 @@ namespace EmployeeManager.Server.API.Controllers
             return CreatedAtAction(nameof(GetEmployeeById), new { employeeId = createdEmployee.EmployeeId }, createdEmployee);
         }
 
+        /// <summary>
+        /// Updates an existing employee's information.
+        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to update</param>
         /// <param name="employeeUpdateDto">The data transfer object containing updated employee information</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
@@ -138,6 +155,9 @@ namespace EmployeeManager.Server.API.Controllers
             return updatedEmployee is null ? NotFound() : Ok(updatedEmployee);
         }
 
+        /// <summary>
+        /// Deletes an employee from the system by their unique identifier.
+        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to delete</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>NoContent if successful, NotFound if employee not found</returns>

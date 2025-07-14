@@ -11,6 +11,9 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<DatabaseInitializer> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DatabaseInitializer"/> class.
+        /// </summary>
         /// <param name="serviceProvider">The application's service provider.</param>
         /// <param name="logger">The logger instance for logging operations.</param>
         public DatabaseInitializer(IServiceProvider serviceProvider, ILogger<DatabaseInitializer> logger)

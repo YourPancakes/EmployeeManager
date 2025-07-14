@@ -16,13 +16,21 @@ namespace EmployeeManager.Server.API.Controllers
         private readonly ICompanyService _companyService;
         private readonly ICompanyStatisticsService _statisticsService;
 
+        /// <summary>
+        /// Initializes a new instance of the CompanyController with required dependencies.
+        /// </summary>
+        /// <param name="companyService">The company service for business logic operations</param>
+        /// <param name="statisticsService">The statistics service for company statistics</param>
+        /// <exception cref="ArgumentNullException">Thrown when any required dependency is null</exception>
         public CompanyController(ICompanyService companyService, ICompanyStatisticsService statisticsService)
         {
             _companyService = companyService ?? throw new ArgumentNullException(nameof(companyService));
             _statisticsService = statisticsService ?? throw new ArgumentNullException(nameof(statisticsService));
         }
 
-
+        /// <summary>
+        /// Retrieves the company information.
+        /// </summary>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The company information if found, NotFound otherwise</returns>
         [HttpGet]

@@ -22,8 +22,7 @@ export class EmployeeService {
     );
   }
 
-  getEmployeesPaginated(parameters: PaginationParameters, searchParameters?: SearchParameters, sortField?: string, sortDirection?: string):
-    Observable<PaginatedResult<Employee>> {
+  getEmployeesPaginated(parameters: PaginationParameters, searchParameters?: SearchParameters, sortField?: string, sortDirection?: string): Observable<PaginatedResult<Employee>> {
     let params = new HttpParams()
       .set('page', parameters.page.toString())
       .set('pageSize', parameters.pageSize.toString());
@@ -46,14 +45,6 @@ export class EmployeeService {
         params = params.set('salary', searchParameters.salary);
       }
     }
-
-    /*if (searchParameters) {
-        Object.entries(searchParameters).forEach(([key, value]) => {
-          if (value !== undefined && value !== null) {
-            params = params.set(key, value);
-          }
-        });
-      } */
 
     // Add sorting parameters if provided
     if (sortField) {
@@ -117,4 +108,4 @@ export class EmployeeService {
   deleteEmployee(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-}
+} 
