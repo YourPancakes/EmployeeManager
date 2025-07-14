@@ -15,9 +15,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
         private readonly EmployeeManagerDbContext _context;
         private readonly ILogger<EmployeeRepository> _logger;
 
-        /// <summary>
-        /// Initializes a new instance of the EmployeeRepository with required dependencies.
-        /// </summary>
         /// <param name="context">The database context for data access</param>
         /// <param name="logger">The logger instance for logging operations</param>
         /// <exception cref="ArgumentNullException">Thrown when database context is null</exception>
@@ -27,9 +24,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        /// <summary>
-        /// Retrieves all employees from the database with department information.
-        /// </summary>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>A collection of all employees in the database</returns>
         public async Task<IEnumerable<Employee>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -41,9 +35,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
                 .ToListAsync(cancellationToken);
         }
 
-        /// <summary>
-        /// Retrieves employees with salary higher than the specified threshold.
-        /// </summary>
         /// <param name="minimumSalary">Minimum salary threshold to filter employees</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>A collection of employees with salary above the specified threshold</returns>
@@ -57,9 +48,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
                 .ToListAsync(cancellationToken);
         }
 
-        /// <summary>
-        /// Retrieves a specific employee by their unique identifier with department information.
-        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to retrieve</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The employee if found, null otherwise</returns>
@@ -72,9 +60,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
                 .FirstOrDefaultAsync(e => e.EmployeeId == employeeId, cancellationToken);
         }
 
-        /// <summary>
-        /// Adds a new employee to the database.
-        /// </summary>
         /// <param name="employee">The employee entity to add</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The added employee with assigned identifier and department information</returns>
@@ -97,9 +82,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
                 .FirstOrDefaultAsync(e => e.EmployeeId == employee.EmployeeId, cancellationToken) ?? employee;
         }
 
-        /// <summary>
-        /// Updates an existing employee in the database.
-        /// </summary>
         /// <param name="employee">The employee entity with updated information</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The updated employee entity</returns>
@@ -119,9 +101,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
             return employee;
         }
 
-        /// <summary>
-        /// Deletes an employee from the database by their unique identifier.
-        /// </summary>
         /// <param name="employeeId">The unique identifier of the employee to delete</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>True if the employee was successfully deleted, false if employee not found</returns>
@@ -259,26 +238,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
             }
 
             return await query.Skip(skip).Take(take).ToListAsync(cancellationToken);
-        }
-
-        /// <summary>
-        /// Retrieves employees with filtering and pagination support at database level.
-        /// </summary>
-        /// <param name="searchParameters">Optional search parameters for filtering employees</param>
-        /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
-        /// <returns>A collection of filtered employees</returns>
-        public async Task<IEnumerable<Employee>> GetFilteredAsync(SearchParametersDto? searchParameters = null, CancellationToken cancellationToken = default)
-        {
-            _logger.LogInformation("Retrieving employees with database-level filtering");
-
-            var query = _context.Employees.Include(e => e.Department).AsQueryable();
-
-            if (searchParameters != null)
-            {
-                query = ApplySearchFilters(query, searchParameters);
-            }
-
-            return await query.ToListAsync(cancellationToken);
         }
 
         /// <summary>

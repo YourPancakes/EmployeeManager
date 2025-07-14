@@ -14,9 +14,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
         private readonly EmployeeManagerDbContext _context;
         private readonly ILogger<CompanyRepository> _logger;
 
-        /// <summary>
-        /// Initializes a new instance of the CompanyRepository with required dependencies.
-        /// </summary>
         /// <param name="context">The database context for data access</param>
         /// <param name="logger">The logger instance for logging operations</param>
         /// <exception cref="ArgumentNullException">Thrown when any of the required dependencies is null</exception>
@@ -26,9 +23,6 @@ namespace EmployeeManager.Server.Infrastructure.Repositories.Implementations
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        /// <summary>
-        /// Retrieves the first company from the database.
-        /// </summary>
         /// <param name="cancellationToken">Cancellation token to cancel the operation</param>
         /// <returns>The first company if found, null otherwise</returns>
         public async Task<Company?> GetFirstAsync(CancellationToken cancellationToken = default)

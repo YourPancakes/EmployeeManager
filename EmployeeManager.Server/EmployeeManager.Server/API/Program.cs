@@ -15,7 +15,6 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure basic services:
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opts =>
@@ -47,7 +46,6 @@ builder.Services.Configure<JsonOptions>(opts =>
     opts.JsonSerializerOptions.WriteIndented = true;
 });
 
-// EF Core
 builder.Services.AddDbContext<EmployeeManagerDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -55,7 +53,6 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddValidatorsFromAssemblyContaining<EmployeeCreateDtoValidator>();
 builder.Services.AddFluentValidationAutoValidation();
 
-// Register validators explicitly for DI
 builder.Services.AddScoped<EmployeeSalaryUpdateValidator>();
 
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
@@ -66,7 +63,6 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<ICompanyStatisticsService, CompanyStatisticsService>();
 
-// Register hosted services
 builder.Services.AddHostedService<DatabaseInitializer>();
 
 var app = builder.Build();

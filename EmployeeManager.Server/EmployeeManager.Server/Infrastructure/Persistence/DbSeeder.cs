@@ -38,12 +38,6 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
             }
         }
 
-        /// <summary>
-        /// Seeds companies if they don't already exist in the database.
-        /// </summary>
-        /// <param name="context">The database context</param>
-        /// <param name="logger">The logger instance</param>
-        /// <returns>A task representing the asynchronous operation</returns>
         private static async Task SeedCompaniesIfNeededAsync(EmployeeManagerDbContext context, ILogger logger)
         {
             try
@@ -68,12 +62,6 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
             }
         }
 
-        /// <summary>
-        /// Seeds departments if they don't already exist in the database.
-        /// </summary>
-        /// <param name="context">The database context</param>
-        /// <param name="logger">The logger instance</param>
-        /// <returns>A task representing the asynchronous operation</returns>
         private static async Task SeedDepartmentsIfNeededAsync(EmployeeManagerDbContext context, ILogger logger)
         {
             try
@@ -107,12 +95,6 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
             }
         }
 
-        /// <summary>
-        /// Seeds employees if they don't already exist in the database.
-        /// </summary>
-        /// <param name="context">The database context</param>
-        /// <param name="logger">The logger instance</param>
-        /// <returns>A task representing the asynchronous operation</returns>
         private static async Task SeedEmployeesIfNeededAsync(EmployeeManagerDbContext context, ILogger logger)
         {
             try
@@ -146,11 +128,6 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
             }
         }
 
-        /// <summary>
-        /// Seeds the database with initial company data.
-        /// </summary>
-        /// <param name="context">The database context</param>
-        /// <returns>A task representing the asynchronous operation</returns>
         private static async Task SeedCompaniesAsync(EmployeeManagerDbContext context)
         {
             var companies = new List<Company>
@@ -169,11 +146,6 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
             await context.Companies.AddRangeAsync(companies);
         }
 
-        /// <summary>
-        /// Seeds the database with initial department data.
-        /// </summary>
-        /// <param name="context">The database context</param>
-        /// <returns>A task representing the asynchronous operation</returns>
         private static async Task SeedDepartmentsAsync(EmployeeManagerDbContext context)
         {
             var company = await context.Companies.FirstOrDefaultAsync();
@@ -198,12 +170,6 @@ namespace EmployeeManager.Server.Infrastructure.Persistence
             await context.Departments.AddRangeAsync(departments);
         }
 
-        /// <summary>
-        /// Seeds the database with initial employee data.
-        /// </summary>
-        /// <param name="context">The database context</param>
-        /// <returns>A task representing the asynchronous operation</returns>
-        /// <exception cref="InvalidOperationException">Thrown when departments are not available for employee seeding</exception>
         private static async Task SeedEmployeesAsync(EmployeeManagerDbContext context)
         {
             var departments = await context.Departments.ToListAsync();
